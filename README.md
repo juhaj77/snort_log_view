@@ -1,4 +1,11 @@
 # snort_log_view
+## install  
+~/snort_log_view/client$ npm install  
+~/snort_log_view/server$ npm install  
+### start
+~/snort_log_view/server$ npm start  
+~/snort_log_view/client$ npm start  
+
 ## snort.lua:
   
 alert_json =  
