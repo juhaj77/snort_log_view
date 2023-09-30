@@ -30,6 +30,7 @@ const Tabs = ({onClick,show}) => {
   }
 }
 
+
 const App = () => {
   const [show, setShow] = useState('ALERTS')
   switch(show) {

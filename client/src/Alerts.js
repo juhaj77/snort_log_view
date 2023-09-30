@@ -6,7 +6,6 @@ function Alerts() {
 
   const [alertsArray, setAlertsArray] = useState([])
 
-  //const [sortBy, setSortBy] = useState({"timestamp":1})
   const callServer = async () => {
     await fetch("http://localhost:9000/alerts")
         .then(res => res.text())

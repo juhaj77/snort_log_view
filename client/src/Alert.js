@@ -31,6 +31,7 @@ const Alert = ({json}) => {
   const handleClick = () => {
     setShowDetails(showDetails ? false : true)
   }
+  
   if(!showDetails){
     return (
       <Row className={bg} onClick={handleClick} json={json}/>

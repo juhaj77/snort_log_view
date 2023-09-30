@@ -43,7 +43,7 @@ function Search() {
     let inv1 = d1.toDateString() === "Invalid Date"
     let inv2 = d2.toDateString() === "Invalid Date"
 
-    //This is for Chrome magic
+    //This is for Chrome
     if(!inv1 && d1.getUTCFullYear() === 2001) d1.setUTCFullYear(date.getUTCFullYear())
     if(!inv2 && d2.getUTCFullYear() === 2001) d2.setUTCFullYear(date.getUTCFullYear())
 
@@ -54,6 +54,7 @@ function Search() {
       d1 = new Date(standard)
       inv1 = d1.toDateString() === "Invalid Date"
     }
+
     if(inv2 && endString !== ''){
       const dt = endString.split('-')
       const d = dt[0].split('/')

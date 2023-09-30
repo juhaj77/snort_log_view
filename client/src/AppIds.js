@@ -11,7 +11,7 @@ function AppIds() {
         .then(res => res.text())
         .then(res => setAppIdArray(JSON.parse(res)))
         .catch(err => err);
-        setTimeout(() => callServer(), 1000);
+        setTimeout(() => callServer(), 1000)
   }
 
   useEffect(() => {
