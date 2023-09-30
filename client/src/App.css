@@ -29,6 +29,7 @@
   padding-right:2em;
   background:#595c62;
   color:white;
+  cursor: pointer;
 }
 .search {
   background-color:black;
@@ -114,4 +115,5 @@ tr:hover {
 }
 .sort:hover {
   background-color: #520101;
+  cursor: pointer;
 }
