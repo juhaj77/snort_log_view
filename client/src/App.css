@@ -12,7 +12,52 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+.search {
+  background-color:black;
+  width: 100%;
+  display: inline-flex;
+  margin-bottom: 0.5em;
+}
+.date {
+  padding-left: 1em;
+  padding-right:1em;
+  padding-top:.2em;
+  white-space: nowrap;
+}
+.dropdown {
+  padding-left: 1em;
+  padding-bottom:.2em;
+  background-color:black;
+  color:white;
+  white-space:nowrap;
+}
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+  width: 280px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
 
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
 .App-header {
   background-color: #303641;
   min-height: 100vh;

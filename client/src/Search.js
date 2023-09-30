@@ -88,30 +88,23 @@ function Search() {
       <div style={{
         marginTop:"1.5em",
         alignItems:"start"}}>
-      <div style={{
-        backgroundColor:"black",
-        width:"100%",
-        display:'inline-flex',
-        marginBottom:"0.5em"}}>
-        <span style={{
-          paddingLeft:"1em",
-          paddingRight:"1em",
-          whiteSpace:"nowrap"
-          }}>start date:</span>
-        <input value={startString} onChange={(event) => setStartString(event.target.value)}/>
-        <span style={{
-          paddingLeft:"1em",
-          paddingRight:"1em",
-          whiteSpace:"nowrap"
-          }}>end date:</span>
-        <input value={endString} onChange={(event) => setEndString(event.target.value)}/>
+      <div className="search">
+        <span className="date">start date:</span>
+        <div className="tooltip">
+          <input value={startString} onChange={(event) => setStartString(event.target.value)}/>
+          <span className="tooltiptext">
+            YYYY-MM-DDTHH:mm:ss <span style={{color:"red"}}>or</span> MM/DD-HH:mm:ss
+          </span>
+        </div>
+        <span className="date">end date:</span>
+        <div className="tooltip">
+          <input value={endString} onChange={(event) => setEndString(event.target.value)}/>
+          <span className="tooltiptext">
+            YYYY-MM-DDTHH:mm:ss <span style={{color:"red"}}>or</span> MM/DD-HH:mm:ss
+          </span>
+        </div>
         <button onClick={filterByDate}>:submit</button>
-        <select onChange={event => updateMode(event.target.value)} style={{
-          paddingLeft:"1em",
-          backgroundColor:"black",
-          color:"white",
-          whiteSpace:"nowrap"
-          }}>
+        <select className="dropdown" onChange={event => updateMode(event.target.value)}>
           <option value="search">search:</option>
           <option value="reject">reject:</option>
         </select>
