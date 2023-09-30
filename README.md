@@ -22,13 +22,13 @@ appid_listener =
         file = "/var/log/snort/appid.json",  
 }  
 ## files  
-files /server/alerts.json and /server/appid.json are requested frequently. To get fresh data, run:
+Alerts tab reads /server/alerts.json file, appid tab /server/appid.json file and search tab reads /server/alerts_all.json file. Files /server/alerts.json and /server/appid.json are requested frequently. To get fresh data, run:
   
     watch -n 5 "tail -n 30 /var/log/snort/alert_json.txt > /home/user/snort_log_view/server/alerts.json && chmod a+r /home/user/snort_log_view/server/alerts.json"  
     watch -n 1 "tail -n 40 /var/log/snort/appid.json > /home/user/snort_log_view/server/appid.json && chmod a+r /home/user/snort_log_view/server/appid.json"
 
   a large file /server/alerts_all.json slows down the operation of the search tab. If /var/log/snort/alert_json.txt is very large, it is recommended to take part of it:
 
-    tail -n 1000 /var/log/snort/alert_json.txt > /home/user/snort_log_view/server/alerts_all.json && chmod a+r /home/user/snort_log_view/server/alerts_all.json
+    tail -n 500 /var/log/snort/alert_json.txt > /home/user/snort_log_view/server/alerts_all.json && chmod a+r /home/user/snort_log_view/server/alerts_all.json
 
 fix the paths
