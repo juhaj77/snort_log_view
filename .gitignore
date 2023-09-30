@@ -1,2 +1,5 @@
 /client/node_modules
 /server/node_modules
+/server/alerts.json
+/server/appid.json
+/server/alerts_all.json
