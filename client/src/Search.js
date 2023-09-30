@@ -38,19 +38,35 @@ function Search() {
   const filterByDate =() => {
     setFilter('')
     const date = new Date()
-    const d1 = new Date(startString)
-    const d2 = new Date(endString)
-    const inv1 = d1.toDateString() === "Invalid Date"
-    const inv2 = d2.toDateString() === "Invalid Date"
+    let d1 = new Date(startString)
+    let d2 = new Date(endString)
+    let inv1 = d1.toDateString() === "Invalid Date"
+    let inv2 = d2.toDateString() === "Invalid Date"
+
+    //This is for Chrome magic
+    if(!inv1 && d1.getUTCFullYear() === 2001) d1.setUTCFullYear(date.getUTCFullYear())
+    if(!inv2 && d2.getUTCFullYear() === 2001) d2.setUTCFullYear(date.getUTCFullYear())
+
+    if(inv1 && startString !== ''){
+      const dt = startString.split('-')
+      const d = dt[0].split('/')
+      const standard = date.getUTCFullYear(date)+'-'+d[0]+'-'+d[1]+'T'+dt[1]
+      d1 = new Date(standard)
+      inv1 = d1.toDateString() === "Invalid Date"
+    }
+    if(inv2 && endString !== ''){
+      const dt = endString.split('-')
+      const d = dt[0].split('/')
+      const standard = date.getUTCFullYear(date)+'-'+d[0]+'-'+d[1]+'T'+dt[1]
+      d2 = new Date(standard)
+      inv2 = d2.toDateString() === "Invalid Date"
+    }
+
     if(!inv1 && !inv2){
-      d1.setUTCFullYear(date.getUTCFullYear())
-      d2.setUTCFullYear(date.getUTCFullYear())
       setAlertsToShow(alertsArray.filter((alert) => alert.seconds >= d1.getTime()/1000 && alert.seconds <= d2.getTime()/1000))
-    } else if(!inv1 && inv2) {
-      d1.setUTCFullYear(date.getUTCFullYear())
+    } else if(!inv1 && inv2){
       setAlertsToShow(alertsArray.filter((alert) => alert.seconds >= d1.getTime()/1000))
     } else if(inv1 && !inv2){
-      d2.setUTCFullYear(date.getUTCFullYear())
       setAlertsToShow(alertsArray.filter((alert) => alert.seconds <= d2.getTime()/1000
       ))
     } else {
