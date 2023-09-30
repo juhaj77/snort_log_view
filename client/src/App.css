@@ -17,6 +17,19 @@
   display: inline-block;
   border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
 }
+.active {
+  padding-left:2em;
+  padding-right:2em;
+  background:#303641;
+  color:white;
+}
+.passive {
+  border-left:solid 1px #303641;
+  padding-left:2em;
+  padding-right:2em;
+  background:#595c62;
+  color:white;
+}
 .search {
   background-color:black;
   width: 100%;
