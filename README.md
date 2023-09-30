@@ -14,6 +14,8 @@ alert_json =
         limit = 100,  
         fields = 'timestamp iface src_addr src_port dst_addr dst_port proto action msg priority class sid dir dst_ap eth_dst eth_len eth_src eth_type gid icmp_code iface ip_id ip_len mpls pkt_gen pkt_len pkt_num rev rule seconds service src_ap target tcp_ack tcp_flags tcp_len tcp_seq tcp_win tos ttl udp_len vlan'  
 }  
+-- only timestamp, priority, rule, proto, src_ap, dst_ap, msg, class and seconds are mandatory  
+  
 appid_listener =  
 {  
         json_logging = true,  
