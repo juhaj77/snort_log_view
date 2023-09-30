@@ -1,10 +1,7 @@
 import React from 'react'
- 
 
 const AppId = ({json}) => {
-  //const [response, setResponse] = useState({})
   
- 
     return (
       <tr style={{backgroundColor:'#2f2537', fontSize:'11px'}}>
       <td>{json.session_num}</td>

@@ -25,6 +25,12 @@ function Search() {
     clone.sort((a,b) => a[sorter] > b[sorter] ? 1 : -1)
     setAlertsToShow(clone)
   }
+
+  const updateMode = (newMode) => {
+    setMode(newMode)
+    filterAlerts(filter,newMode)
+  }
+
   useEffect(() => {
     callServer()
   },[])
@@ -34,8 +40,8 @@ function Search() {
     const date = new Date()
     const d1 = new Date(startString)
     const d2 = new Date(endString)
-    const inv1 = d1.toDateString() == "Invalid Date"
-    const inv2 = d2.toDateString() == "Invalid Date"
+    const inv1 = d1.toDateString() === "Invalid Date"
+    const inv2 = d2.toDateString() === "Invalid Date"
     if(!inv1 && !inv2){
       d1.setUTCFullYear(date.getUTCFullYear())
       d2.setUTCFullYear(date.getUTCFullYear())
@@ -51,13 +57,13 @@ function Search() {
       setAlertsToShow(alertsArray)
     }
   }
-  const filterAlerts = (str) => {
+  const filterAlerts = (str,mod) => {
     setFilter(str)
     setStartString('')
     setEndString('')
-    if(mode == 'search') setAlertsToShow(alertsArray.filter(alert => alert.msg.indexOf(str) != -1 || alert.class.indexOf(str) != -1))
-    if(mode == 'reject') setAlertsToShow(alertsArray.filter(alert => alert.msg.indexOf(str) == -1 && alert.class.indexOf(str) == -1))
-    if(str == '') setAlertsToShow(alertsArray)
+    if(mod === 'search') setAlertsToShow(alertsArray.filter(alert => alert.msg.indexOf(str) !== -1 || alert.class.indexOf(str) !== -1))
+    if(mod === 'reject') setAlertsToShow(alertsArray.filter(alert => alert.msg.indexOf(str) === -1 && alert.class.indexOf(str) === -1))
+    if(str === '') setAlertsToShow(alertsArray)
   }
 
   return (
@@ -83,7 +89,7 @@ function Search() {
           }}>end date:</span>
         <input value={endString} onChange={(event) => setEndString(event.target.value)}/>
         <button onClick={filterByDate}>:submit</button>
-        <select onChange={event => setMode(event.target.value)} style={{
+        <select onChange={event => updateMode(event.target.value)} style={{
           paddingLeft:"1em",
           backgroundColor:"black",
           color:"white",
@@ -92,7 +98,7 @@ function Search() {
           <option value="search">search:</option>
           <option value="reject">reject:</option>
         </select>
-        <input value={filter} onChange={event => filterAlerts(event.target.value)} style={{width:"100%"}} ></input>
+        <input value={filter} onChange={event => filterAlerts(event.target.value,mode)} style={{width:"100%"}} ></input>
       </div>
       <table >
         <tbody>

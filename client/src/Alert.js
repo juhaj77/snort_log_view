@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useState } from 'react'
 
 const Row = ({className,onClick,json}) =>  
   <tr className={className} onClick={onClick}>
@@ -14,7 +13,6 @@ const Row = ({className,onClick,json}) =>
   </tr>
 
 const Alert = ({json}) => {
-  //const [response, setResponse] = useState({})
   const [showDetails, setShowDetails] = useState(false) 
   const bg = 'A'+json.priority
   const details = [] 
