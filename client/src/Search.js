@@ -82,7 +82,22 @@ function Search() {
     if(mod === 'reject') setAlertsToShow(alertsArray.filter(alert => alert.msg.indexOf(str) === -1 && alert.class.indexOf(str) === -1))
     if(str === '') setAlertsToShow(alertsArray)
   }
-
+  const sortByRarity = () => {
+    const eventsByType = alertsToShow.reduce((alarms,alarm) => {
+      alarms[alarm['rule']] = alarms[alarm['rule']] || []
+      alarms[alarm['rule']].push({...alarm})
+      return alarms
+    }, {})
+    let grouped = Object.values(eventsByType)
+    const sorted = grouped.sort((A,B) => A.length > B.length ? 1 : -1)
+    let result = []
+    sorted.forEach(subarray => {
+      subarray.forEach(alert => {
+        result.push(alert)
+      })
+    })
+    setAlertsToShow(result)
+  }
   return (
     <div className="App-header">
       <div style={{
@@ -93,14 +108,14 @@ function Search() {
         <div className="tooltip">
           <input value={startString} onChange={(event) => setStartString(event.target.value)}/>
           <span className="tooltiptext">
-            YYYY-MM-DDTHH:mm:ss <span style={{color:"red"}}>or</span> MM/DD-HH:mm:ss
+            &#160;&#160;&#160;YYYY-MM-DDTHH:mm:ss <span style={{color:"red"}}>or</span> MM/DD-HH:mm:ss&#160;&#160;&#160;
           </span>
         </div>
         <span className="date">end date:</span>
         <div className="tooltip">
           <input value={endString} onChange={(event) => setEndString(event.target.value)}/>
           <span className="tooltiptext">
-            YYYY-MM-DDTHH:mm:ss <span style={{color:"red"}}>or</span> MM/DD-HH:mm:ss
+            &#160;&#160;&#160;YYYY-MM-DDTHH:mm:ss <span style={{color:"red"}}>or</span> MM/DD-HH:mm:ss&#160;&#160;&#160;
           </span>
         </div>
         <button onClick={filterByDate}>:submit</button>
@@ -109,6 +124,10 @@ function Search() {
           <option value="reject">reject:</option>
         </select>
         <input value={filter} onChange={event => filterAlerts(event.target.value,mode)} style={{width:"100%"}} ></input>
+        <div className="tooltip">
+          <button onClick={sortByRarity}>R</button>
+          <span className="tooltiptext">&#160;&#160;&#160;sort by rarity&#160;&#160;&#160;</span>
+        </div>
       </div>
       <table >
         <tbody>

@@ -52,11 +52,11 @@
 }
 
 .tooltip .tooltiptext {
+  white-space:nowrap;
   visibility: hidden;
   bottom: 100%;
   left: 50%;
-  margin-left: -60px;
-  width: 280px;
+  margin-left: -80px;
   background-color: black;
   color: #fff;
   text-align: center;
