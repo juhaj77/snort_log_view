@@ -10,16 +10,16 @@
   
 alert_json =  
 {        
-    file = true,    
-        limit = 100,  
-        fields = 'timestamp iface src_addr src_port dst_addr dst_port proto action msg priority class sid dir dst_ap eth_dst eth_len eth_src eth_type gid icmp_code iface ip_id ip_len mpls pkt_gen pkt_len pkt_num rev rule seconds service src_ap target tcp_ack tcp_flags tcp_len tcp_seq tcp_win tos ttl udp_len vlan'  
+&ensp;&ensp;&ensp;&ensp;file = true,    
+&ensp;&ensp;&ensp;&ensp;limit = 100,  
+&ensp;&ensp;&ensp;&ensp;fields = 'timestamp iface src_addr src_port dst_addr dst_port proto action msg priority class sid dir dst_ap eth_dst eth_len eth_src eth_type gid icmp_code iface ip_id ip_len mpls pkt_gen pkt_len pkt_num rev rule seconds service src_ap target tcp_ack tcp_flags tcp_len tcp_seq tcp_win tos ttl udp_len vlan'  
 }  
 -- only timestamp, priority, rule, proto, src_ap, dst_ap, msg, class and seconds are mandatory  
   
 appid_listener =  
 {  
-        json_logging = true,  
-        file = "/var/log/snort/appid.json",  
+&ensp;&ensp;&ensp;&ensp;json_logging = true,  
+&ensp;&ensp;&ensp;&ensp;file = "/var/log/snort/appid.json",  
 }  
 ## files  
 Alerts tab reads /server/alerts.json file, appid tab /server/appid.json file and search tab reads /server/alerts_all.json file. Files /server/alerts.json and /server/appid.json are requested frequently. To get fresh data, run:
