@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Loading from './Loading'
 import './App.css';
 import Alert from './Alert';
 
@@ -19,7 +20,7 @@ function Alerts() {
     callServer()
   },[])
 
-  return (
+  return alertsArray.length == 0 ? <Loading/> :
     <div className="App">
       <table className="App-header">
         <tbody>
@@ -37,7 +38,6 @@ function Alerts() {
         </tbody>
       </table>
     </div>
-  );
 }
 
 export default Alerts;

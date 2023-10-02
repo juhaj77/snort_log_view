@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Loading from './Loading'
 import './App.css';
 import AppId from './AppId';
 
@@ -11,14 +12,14 @@ function AppIds() {
         .then(res => res.text())
         .then(res => setAppIdArray(JSON.parse(res)))
         .catch(err => err);
-        setTimeout(() => callServer(), 1000)
+        setTimeout(() => callServer(), 1000);
   }
 
   useEffect(() => {
     callServer()
   },[])
 
-  return (
+  return appIdArray.length == 0 ? <Loading/> :
     <div className="App">
       <table className="App-header">
         <tbody>
@@ -39,7 +40,7 @@ function AppIds() {
         </tbody>
       </table>
     </div>
-  );
+  
 }
 
 export default AppIds;

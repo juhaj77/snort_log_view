@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Loading from './Loading'
 import './App.css';
 import Alert from './Alert';
 
@@ -100,6 +101,7 @@ function Search() {
   }
   return (
     <div className="App-header">
+      { alertsToShow.length == 0 ? <Loading/> : 
       <div style={{
         marginTop:"1.5em",
         alignItems:"start"}}>
@@ -144,7 +146,7 @@ function Search() {
           {alertsToShow.map((e) => <Alert key={e.timestamp+Math.random()} json={e} />)}
         </tbody>
       </table>
-      </div>
+      </div> }
     </div>
   );
 }

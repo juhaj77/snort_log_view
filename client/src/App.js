@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css';
 import Alerts from './Alerts';
 import AppIds from './AppIds';
@@ -29,7 +29,6 @@ const Tabs = ({onClick,show}) => {
       </div>)
   }
 }
-
 
 const App = () => {
   const [show, setShow] = useState('ALERTS')
