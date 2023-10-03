@@ -21,6 +21,7 @@ function Search() {
         })
         .catch(err => err);
   }
+
   const sortAlerts = (sorter) => {
     let clone = [...alertsToShow]
     clone.sort((a,b) => a[sorter] > b[sorter] ? 1 : -1)
@@ -75,6 +76,7 @@ function Search() {
       setAlertsToShow(alertsArray)
     }
   }
+
   const filterAlerts = (str,mod) => {
     setFilter(str)
     setStartString('')
@@ -83,6 +85,7 @@ function Search() {
     if(mod === 'reject') setAlertsToShow(alertsArray.filter(alert => alert.msg.indexOf(str) === -1 && alert.class.indexOf(str) === -1))
     if(str === '') setAlertsToShow(alertsArray)
   }
+
   const sortByRarity = () => {
     const eventsByType = alertsToShow.reduce((alarms,alarm) => {
       alarms[alarm['rule']] = alarms[alarm['rule']] || []
@@ -90,18 +93,19 @@ function Search() {
       return alarms
     }, {})
     let grouped = Object.values(eventsByType)
-    const sorted = grouped.sort((A,B) => A.length > B.length ? 1 : -1)
+    grouped.sort((A,B) => A.length > B.length ? 1 : -1)
     let result = []
-    sorted.forEach(subarray => {
+    grouped.forEach(subarray => {
       subarray.forEach(alert => {
         result.push(alert)
       })
     })
     setAlertsToShow(result)
   }
+
   return (
     <div className="App-header">
-      { alertsToShow.length == 0 ? <Loading/> : 
+      { alertsToShow.length === 0 ? <Loading/> : 
       <div style={{
         marginTop:"1.5em",
         alignItems:"start"}}>

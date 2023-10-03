@@ -20,7 +20,7 @@ function Alerts() {
     callServer()
   },[])
 
-  return alertsArray.length == 0 ? <Loading/> :
+  return alertsArray.length === 0 ? <Loading/> :
     <div className="App">
       <table className="App-header">
         <tbody>

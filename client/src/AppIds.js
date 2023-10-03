@@ -19,7 +19,7 @@ function AppIds() {
     callServer()
   },[])
 
-  return appIdArray.length == 0 ? <Loading/> :
+  return appIdArray.length === 0 ? <Loading/> :
     <div className="App">
       <table className="App-header">
         <tbody>
