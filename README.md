@@ -1,4 +1,5 @@
 # snort_log_view
+Colorized html table view for Snort alert and appid log. The alert information generates the Wireshark filter from time data. Tested with Firefox and Chrome.
 ## install  
 ~/snort_log_view/client$ npm install  
 ~/snort_log_view/server$ npm install  
