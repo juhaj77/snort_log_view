@@ -27,12 +27,12 @@ function Perf() {
         } 
     }
     for(const key of Object.keys(hellishObject)){
-        if(hellishObject[key].reduce((sum,value) => sum + value,0) == 0)
+        if(hellishObject[key].length > 0 && hellishObject[key].reduce((sum,value) => sum + value,0) == 0)
             delete hellishObject[key]
     }
     setPerfObject(hellishObject)
   },[perf])
-  
+
   const convertTime = (seconds) => {
     const date = new Date(seconds*1000)
     const time = date.toTimeString().split(' ')
