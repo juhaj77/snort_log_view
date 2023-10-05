@@ -42,5 +42,10 @@ use:
 
     tail -n 3 -f /var/log/snort/perf_monitor_base.csv > /home/user/snort_log_view/server/perf_monitor_base.csv
   
-grant read permissions `chmod a+r /home/user/snort_log_view/server/perf_monitor_base.csv`. Restarting Snort causes a new header line. The function of the Perf tab is to display non-zero values, and the second header line causes an error for this. Then use the command `tail -n 1 -f /var/log/snort/perf_monitor_base.csv > /home/user/snort_log_view/server/perf_monitor_base.csv` to clean the file.
+grant read permissions `chmod a+r /home/user/snort_log_view/server/perf_monitor_base.csv`.  
+**Restarting Snort causes a new header line**. The function of the Perf tab is to display non-zero values, and the second header line causes an error for this. Then use the command:
+
+    tail -n 1 -f /var/log/snort/perf_monitor_base.csv > /home/user/snort_log_view/server/perf_monitor_base.csv
+
+to clean the file.
 
