@@ -12,6 +12,11 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.perf {
+  color:#f5ffb4;
+  background-color:#303641;
+  font-size: 11px;
+}
 .tooltip {
   position: relative;
   display: inline-block;

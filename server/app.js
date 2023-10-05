@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var alertsRouter = require('./routes/alerts');
 var appidsRouter = require('./routes/appids');
 var alertsAllRouter = require('./routes/alertsAll');
+var perfRouter = require('./routes/perf');
 var app = express();
 
 // view engine setup
@@ -25,6 +26,7 @@ app.use('/', indexRouter);
 app.use("/alerts", alertsRouter);
 app.use("/appids", appidsRouter);
 app.use("/alerts_all", alertsAllRouter);
+app.use('/perf',perfRouter)
 //app.use("/alert", alertRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

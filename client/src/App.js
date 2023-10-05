@@ -3,6 +3,7 @@ import './App.css';
 import Alerts from './Alerts';
 import AppIds from './AppIds';
 import Search from './Search';
+import Perf from './Perf';
 
 const Tabs = ({onClick,show}) => {
   switch(show) {
@@ -11,6 +12,7 @@ const Tabs = ({onClick,show}) => {
         <div className="active">ALERTS</div>
         <div className="passive" onClick={() => onClick('APPID')}>APPID</div>
         <div className="passive" onClick={() => onClick('SEARCH')}>SEARCH</div>
+        <div className="passive" onClick={() => onClick('PERF')}>PERF</div>
       </div>)
    case 'APPID': 
     return (
@@ -18,6 +20,7 @@ const Tabs = ({onClick,show}) => {
         <div className="passive" onClick={() => onClick('ALERTS')}>ALERTS</div>
         <div className="active">APPID</div>
         <div className="passive" onClick={() => onClick('SEARCH')}>SEARCH</div>
+        <div className="passive" onClick={() => onClick('PERF')}>PERF</div>
       </div>)
   
   case 'SEARCH': 
@@ -26,7 +29,16 @@ const Tabs = ({onClick,show}) => {
         <div className="passive" onClick={() => onClick('ALERTS')}>ALERTS</div>
         <div className="passive" onClick={() => onClick('APPID')}>APPID</div>
         <div className="active">SEARCH</div>
+        <div className="passive" onClick={() => onClick('PERF')}>PERF</div>
       </div>)
+     case 'PERF': 
+     return (
+       <div style={{display:'inline-flex'}}>
+         <div className="passive" onClick={() => onClick('ALERTS')}>ALERTS</div>
+         <div className="passive" onClick={() => onClick('APPID')}>APPID</div>
+         <div className="passive" onClick={() => onClick('SEARCH')}>SEARCH</div>
+         <div className="active">PERF</div>
+       </div>)
   }
 }
 
@@ -51,6 +63,12 @@ const App = () => {
     <div>
       <Tabs onClick={setShow} show={show}/>
       <Search/>
+   </div>)
+   case 'PERF':
+    return (
+    <div>
+      <Tabs onClick={setShow} show={show}/>
+      <Perf/>
    </div>)
   }
 }
