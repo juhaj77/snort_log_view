@@ -23,7 +23,7 @@ function Perf() {
     for(let i = 0; i < perf[0].length; i++){
         hellishObject[perf[0][i]] = []
         for(let j = 1; j < perf.length - 1; j++){
-            hellishObject[perf[0][i]].push(perf[j][i])
+            if(!isNaN(perf[j][i])) hellishObject[perf[0][i]].push(perf[j][i])
         } 
     }
     for(const key of Object.keys(hellishObject)){
@@ -36,7 +36,7 @@ function Perf() {
   const convertTime = (seconds) => {
     const date = new Date(seconds*1000)
     const time = date.toTimeString().split(' ')
-    return time[0]
+    return (date.getMonth()+1)+'/'+date.getDate()+'-'+time[0]
   }
 
   return Object.keys(perfObject).length === 0 ? <Loading/> :
@@ -44,7 +44,7 @@ function Perf() {
         <table>
             <tbody>
             {Object.keys(perfObject).map(key => <tr key={Math.random()}>
-                <td >{key === '#timestamp' ? 'time of day' : key}</td>
+                <td >{key === '#timestamp' ? 'date M/D-HH:mm:ss' : key}</td>
                 {perfObject[key].map(value => <td key={Math.random()}>
                     {key === '#timestamp' ? convertTime(value) : value}
                     </td>)}

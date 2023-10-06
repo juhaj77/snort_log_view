@@ -1,5 +1,5 @@
 # snort_log_view
-Colorized html table view for Snort alert, appid and performance monitor log. The alert information generates the Wireshark filter from time data. Tested with Firefox and Chrome.
+Colorized html table view for Snort alert, appid and performance monitor log. The Perf tab cleans out fields with zero values. The alert information generates the Wireshark filter from time data. Tested with Firefox and Chrome.
 ## install  
 ~/snort_log_view/client$ npm install  
 ~/snort_log_view/server$ npm install  
@@ -23,7 +23,7 @@ appid_listener =
 &ensp;&ensp;&ensp;&ensp;file = "/var/log/snort/appid.json",  
 }  
 ## files  
-Data handling is a bit clumsy, but the software architecture is simple. Alerts tab reads /server/alerts.json file, appid tab /server/appid.json file and search tab reads /server/alerts_all.json file. Files /server/alerts.json and /server/appid.json are requested frequently. To get fresh data, run (fix the paths):
+Data handling is a bit clumsy, but the software architecture is simple. Alerts tab reads /server/alerts.json file, appid tab /server/appid.json file and search tab reads /server/alerts_all.json file. Files /server/alerts.json and /server/appid.json are requested frequently. Superuser rights are required. To get fresh data, run (fix the paths):
   
     watch -n 5 "tail -n 35 /var/log/snort/alert_json.txt > /home/user/snort_log_view/server/alerts.json && chmod a+r /home/user/snort_log_view/server/alerts.json"  
     watch -n 1 "tail -n 40 /var/log/snort/appid.json > /home/user/snort_log_view/server/appid.json && chmod a+r /home/user/snort_log_view/server/appid.json"
@@ -32,20 +32,15 @@ Data handling is a bit clumsy, but the software architecture is simple. Alerts t
 
     tail -n 500 /var/log/snort/alert_json.txt > /home/user/snort_log_view/server/alerts_all.json && chmod a+r /home/user/snort_log_view/server/alerts_all.json
 #### performance monitor data
-perf_monitor_base.csv should be read from the last header line. You can check it with `awk -F, '{print $1}' /var/log/snort/perf_monitor_base.csv`. For example, if it gives:  
+perf_monitor_base.csv should be read from header line. You can check it with `awk -F, '{print $1}' /var/log/snort/perf_monitor_base.csv`. For example, if it gives:  
 ...  
 #timestamp  
 1696441646  
 1696443611  
   
-use:  
+then use:  
 
     tail -n 3 -f /var/log/snort/perf_monitor_base.csv > /home/user/snort_log_view/server/perf_monitor_base.csv
   
 grant read permissions `chmod a+r /home/user/snort_log_view/server/perf_monitor_base.csv`.  
-**Restarting Snort causes a new header line**. The function of the Perf tab is to display non-zero values, and the second header line causes an error for this. Then use the command:
-
-    tail -n 1 -f /var/log/snort/perf_monitor_base.csv > /home/user/snort_log_view/server/perf_monitor_base.csv
-
-to clean the file.
 
