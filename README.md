@@ -1,5 +1,5 @@
 # snort_log_view
-Colorized html table view for Snort alert, appid and performance monitor log. The Perf tab cleans out fields with zero values. The alert information generates the Wireshark filter from time data. Tested with Firefox and Chrome.
+Colorized html table view for Snort alert, appid and performance monitor log. The Perf tab cleans out fields with zero values. The alert information generates the Wireshark filter from time data. The appid_listener is https://github.com/snort3/snort3_extra feature. It also works without it. Just ignore the appid tab.Performance monitoring does not need to be enabled. Just keep the files appid.json and perf_monitor_base.cvs in the server directory. Tested with Firefox and Chrome.
 ## install  
 ~/snort_log_view/client$ npm install  
 ~/snort_log_view/server$ npm install  
@@ -23,7 +23,7 @@ appid_listener =
 &ensp;&ensp;&ensp;&ensp;file = "/var/log/snort/appid.json",  
 }  
 ## files  
-Data handling is a bit clumsy, but the software architecture is simple. Alerts tab reads /server/alerts.json file, appid tab /server/appid.json file and search tab reads /server/alerts_all.json file. Files /server/alerts.json and /server/appid.json are requested frequently. Superuser rights are required. To get fresh data, run (fix the paths):
+Data handling is a bit clumsy, but the software architecture is simple. Alerts tab reads /server/alerts.json file, appid tab /server/appid.json file and search tab reads /server/alerts_all.json file. Files /server/alerts.json and /server/appid.json are requested frequently. To get fresh data, run (superuser rights are required. fix the paths):
   
     watch -n 5 "tail -n 35 /var/log/snort/alert_json.txt > /home/user/snort_log_view/server/alerts.json && chmod a+r /home/user/snort_log_view/server/alerts.json"  
     watch -n 1 "tail -n 40 /var/log/snort/appid.json > /home/user/snort_log_view/server/appid.json && chmod a+r /home/user/snort_log_view/server/appid.json"
