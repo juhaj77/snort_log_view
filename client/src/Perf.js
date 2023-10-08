@@ -45,7 +45,7 @@ function Perf() {
             <tbody>
             {Object.keys(perfObject).map(key => <tr key={Math.random()}>
                 <td >{key === '#timestamp' ? 'date M/D-HH:mm:ss' : key}</td>
-                {perfObject[key].map(value => <td key={Math.random()}>
+                {perfObject[key].map(value => <td key={Math.random()} style={{whiteSpace:'nowrap'}}>
                     {key === '#timestamp' ? convertTime(value) : value}
                     </td>)}
             </tr>)}
