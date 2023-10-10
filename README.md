@@ -12,11 +12,11 @@ Search feature search of the last 500 alerts. You can modify it in /server/route
 Large values cause memory issues with the browser. All data is read as objects into the browser's memory...
 
 ## install  
-~/snort_log_view/client$ npm install  
-~/snort_log_view/server$ npm install  
+/snort_log_view/client$ npm install  
+/snort_log_view/server$ npm install  
 ### start
-~/snort_log_view/server$ sudo npm start  
-~/snort_log_view/client$ npm start  
+/snort_log_view/server$ sudo npm start  
+/snort_log_view/client$ npm start  
 
 ## snort.lua:
   
