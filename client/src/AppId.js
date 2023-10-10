@@ -38,7 +38,7 @@ const AppId = ({json}) => {
   <>
    <AppIdRow  onClick={handleClick} json={json}/>
     <tr>
-      <td colSpan='8' className='details'>find with Wireshark:<br/>
+      <td colSpan='9' className='details'>find with Wireshark:<br/>
           <span style={{
             fontSize:12,
             fontWeight:'bolder',
