@@ -10,7 +10,8 @@ function Alerts() {
   const callServer = async () => {
     await fetch("http://localhost:9000/alerts")
         .then(res => res.text())
-        .then(res => setAlertsArray(JSON.parse(res)))
+        .then(res => {
+          setAlertsArray(JSON.parse(res))})
         .catch(err => err);
         
         setTimeout(() => callServer(), 5000);
@@ -20,7 +21,7 @@ function Alerts() {
     callServer()
   },[])
 
-  return alertsArray.length === 0 ? <Loading/> :
+  return alertsArray.length === 0 ? <Loading text='loading...'/> :
     <div className="App">
       <table className="App-header">
         <tbody>

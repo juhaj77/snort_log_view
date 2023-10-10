@@ -1,42 +1,51 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import io from 'socket.io-client'
 import Loading from './Loading'
 import './App.css';
 import AppId from './AppId';
 
+const socket = io('ws://localhost:3003')
+
 function AppIds() {
 
   const [appIdArray, setAppIdArray] = useState([])
-
-  const callServer = async () => {
-    await fetch("http://localhost:9000/appids")
-        .then(res => res.text())
-        .then(res => setAppIdArray(JSON.parse(res)))
-        .catch(err => err);
-        setTimeout(() => callServer(), 1000);
-  }
-
+  const [count, setCount] = useState(0)
+  const count3 = useRef(0)
+  let array = []
+ 
   useEffect(() => {
-    callServer()
+    socket.on('json', data => {
+      setCount(count => count + 1)
+      if(array.length == 0) array.push(data)
+      else if(array[array.length-1].pkt_time != data.pkt_time) {
+        count3.current = count3.current + 1
+        data.count = count3.current
+        array.push(data)
+        if(array.length > 40) array.shift()
+        setAppIdArray([...array])
+      }
+    })
   },[])
 
-  return appIdArray.length === 0 ? <Loading/> :
+  return appIdArray.length === 0 ? <Loading text='listening...'/> :
     <div className="App">
       <table className="App-header">
         <tbody>
           <tr style={{backgroundColor:'black'}}>
+            <th style={{width:'5em'}}>count</th>
             <th>session</th>
             <th>pkt time</th>
-            <th>service</th>
-            <th>client</th>
+            <th style={{width:'5em'}}>service</th>
+            <th style={{width:'5em'}}>client</th>
             <th>proto</th>
-            <th>client ip</th>
-            <th>port</th>
-            <th>service ip</th>
-            <th>port</th>
-            <th>DNS host</th>
-            <th>TLS host</th>
+            <th style={{width:'8em'}}>client ip</th>
+            <th style={{width:'4em'}}>port</th>
+            <th style={{width:'8em'}}>service ip</th>
+            <th style={{width:'4em'}}>port</th>
+            <th style={{width:'15em'}}>DNS host</th>
+            <th style={{width:'15em'}}>TLS host</th>
           </tr>
-          {appIdArray.map((e,k) => <AppId key={e.pkt_time+k} json={e} />)}
+          {appIdArray.map((e,k) => <AppId key={e.pkt_time+k} count={count} json={e} />)}
         </tbody>
       </table>
     </div>

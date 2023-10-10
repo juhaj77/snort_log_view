@@ -1,10 +1,21 @@
 # snort_log_view
-Colorized html table view for Snort alert, appid and performance monitor log. The Perf tab cleans out fields with zero values. The alert information generates the Wireshark filter from time data. The appid_listener is https://github.com/snort3/snort3_extra feature. It also works without it. Just ignore the appid tab.Performance monitoring does not need to be enabled. Just keep the files appid.json and perf_monitor_base.cvs in the server directory. Tested with Firefox and Chrome.
+Colorized html table view for Snort alert, appid and performance monitor log. The Perf tab cleans out fields with zero values. The alert information generates the Wireshark filter from time data. The appid feature displays real-time data. The appid_listener is https://github.com/snort3/snort3_extra feature. Server reads the files:  
+  
+/var/log/snort/alert_json.txt  
+/var/log/snort/appid.json  
+/var/log/snort/perf_monitor_base.csv  
+  
+Search feature search of the last 500 alerts. You can modify it in /server/routes/alertsAll.js on line 9:  
+  
+`readLastLines.read('/var/log/snort/alert_json.txt', 500)`  
+  
+Large values cause memory issues with the browser. All data is read as objects into the browser's memory...
+
 ## install  
 ~/snort_log_view/client$ npm install  
 ~/snort_log_view/server$ npm install  
 ### start
-~/snort_log_view/server$ npm start  
+~/snort_log_view/server$ sudo npm start  
 ~/snort_log_view/client$ npm start  
 
 ## snort.lua:
@@ -22,25 +33,3 @@ appid_listener =
 &ensp;&ensp;&ensp;&ensp;json_logging = true,  
 &ensp;&ensp;&ensp;&ensp;file = "/var/log/snort/appid.json",  
 }  
-## files  
-Data handling is a bit clumsy, but the software architecture is simple. Alerts tab reads /server/alerts.json file, appid tab /server/appid.json file and search tab reads /server/alerts_all.json file. Files /server/alerts.json and /server/appid.json are requested frequently. To get fresh data, run (superuser rights are required. fix the paths):
-  
-    watch -n 5 "tail -n 35 /var/log/snort/alert_json.txt > /home/user/snort_log_view/server/alerts.json && chmod a+r /home/user/snort_log_view/server/alerts.json"  
-    watch -n 1 "tail -n 40 /var/log/snort/appid.json > /home/user/snort_log_view/server/appid.json && chmod a+r /home/user/snort_log_view/server/appid.json"
-
-  a large file /server/alerts_all.json slows down the operation of the search tab. If /var/log/snort/alert_json.txt is thousands of lines long, it is recommended to take part of it:
-
-    tail -n 500 /var/log/snort/alert_json.txt > /home/user/snort_log_view/server/alerts_all.json && chmod a+r /home/user/snort_log_view/server/alerts_all.json
-#### performance monitor data
-perf_monitor_base.csv should be read from header line. You can check it with `awk -F, '{print $1}' /var/log/snort/perf_monitor_base.csv`. For example, if it gives:  
-...  
-#timestamp  
-1696441646  
-1696443611  
-  
-then use:  
-
-    tail -n 3 -f /var/log/snort/perf_monitor_base.csv > /home/user/snort_log_view/server/perf_monitor_base.csv
-  
-grant read permissions `chmod a+r /home/user/snort_log_view/server/perf_monitor_base.csv`.  
-

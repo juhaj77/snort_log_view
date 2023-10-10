@@ -103,9 +103,8 @@ function Search() {
     setAlertsToShow(result)
   }
 
-  return (
+  return alertsToShow.length === 0 ? <Loading text='loading...'/> : 
     <div className="App-header">
-      { alertsToShow.length === 0 ? <Loading/> : 
       <div style={{
         marginTop:"1.5em",
         alignItems:"start"}}>
@@ -150,9 +149,8 @@ function Search() {
           {alertsToShow.map((e) => <Alert key={e.timestamp+Math.random()} json={e} />)}
         </tbody>
       </table>
-      </div> }
+      </div>
     </div>
-  );
 }
 
 export default Search;

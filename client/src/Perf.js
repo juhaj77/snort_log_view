@@ -39,7 +39,7 @@ function Perf() {
     return (date.getMonth()+1)+'/'+date.getDate()+'-'+time[0]
   }
 
-  return Object.keys(perfObject).length === 0 ? <Loading/> :
+  return Object.keys(perfObject).length === 0 ? <Loading text='loading...'/> :
     <div className='perf'>
         <table>
             <tbody>

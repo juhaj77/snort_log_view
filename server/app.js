@@ -4,17 +4,22 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-var indexRouter = require('./routes/index');
+//var indexRouter = require('./routes/index');
+var Tail = require('tail').Tail;
 var alertsRouter = require('./routes/alerts');
-var appidsRouter = require('./routes/appids');
 var alertsAllRouter = require('./routes/alertsAll');
 var perfRouter = require('./routes/perf');
 var app = express();
+var io = require('socket.io')(app.listen(3003), {
+  cors: {
+    origin: true,
+    credentials: true,
+  },
+  allowEIO3: true,});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(cors());
@@ -22,13 +27,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+io.on('connection', function (socket) {
+  console.log('client connect');
+});
+const tail = new Tail('/var/log/snort/appid.json')
+tail.on('line', function(data) {     
+  json = JSON.parse(data)
+  io.sockets.emit('json', json)
+});
+tail.on('error', error => console.log(error))
+
 app.use("/alerts", alertsRouter);
-app.use("/appids", appidsRouter);
 app.use("/alerts_all", alertsAllRouter);
 app.use('/perf',perfRouter)
-//app.use("/alert", alertRouter);
-// catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
