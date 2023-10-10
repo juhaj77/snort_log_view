@@ -20,6 +20,8 @@ Large values cause memory issues with the browser. All data is read as objects i
 
 ## snort.lua:
   
+perf_monitor = {}  
+  
 alert_json =  
 {        
 &ensp;&ensp;&ensp;&ensp;file = true,    
