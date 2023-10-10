@@ -109,6 +109,23 @@
     transform: rotate(360deg);
   }
 }
+.appid {
+  white-space:nowrap;
+  background-color:#2f2537;
+  font-size:11px;
+}
+.unknown {
+  white-space:nowrap;
+  background-color:#4d2629;
+  font-size:11px;
+}
+.details {
+  background:black;
+  text-align:left;
+  padding-left:4em;
+  padding-top:1em;
+  padding-bottom:1em;
+}
 table, th, td {
   border: 1px solid rgb(28, 28, 28);
 }

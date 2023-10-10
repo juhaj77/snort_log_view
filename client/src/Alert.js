@@ -32,38 +32,30 @@ const Alert = ({json}) => {
     setShowDetails(showDetails ? false : true)
   }
   
-  if(!showDetails){
-    return (
-      <Row className={bg} onClick={handleClick} json={json}/>
-  )} else {
-    return (
-      <>
+  return showDetails ?
+    <>
       <Row className={bg} onClick={handleClick} json={json}/>
       <tr>
-        <td colSpan='7' style={{
-          background:'black',
-          textAlign:'left',
-          paddingLeft:'4em',
-          paddingTop:'1em',
-          paddingBottom:'1em'}}>find with Wireshark:<br/>
-          <span style={{
-            fontSize:12,
-            fontWeight:'bolder',
-            color:'#38fcff'}}>{filter}</span><br/><br/>
+        <td colSpan='7' className='details'>
+          find with Wireshark:<br/>
+            <span style={{
+              fontSize:12,
+              fontWeight:'bolder',
+              color:'#38fcff'}}>{filter}</span><br/><br/>
             <table style={{borderCollapse:"collapse"}}>
-                <tbody>
+              <tbody>
                 {details.map((item,i) => 
-                  <tr style={{background:'black'}} key={i}>
-                    <td style={{fontWeight:'bolder',
-                                color:'red',
-                                borderColor:"black"}}>{item[0]+':'}</td>
-                    <td style={{borderColor:'black'}}>{item[1]}</td></tr>)}
-                </tbody>
+                <tr style={{background:'black'}} key={i}>
+                  <td style={{fontWeight:'bolder',
+                              color:'red',
+                              borderColor:"black"}}>{item[0]+':'}</td>
+                  <td style={{borderColor:'black'}}>{item[1]}</td></tr>)}
+              </tbody>
             </table>
         </td>
       </tr>
-      </>
-  )}
+    </>
+  : <Row className={bg} onClick={handleClick} json={json}/>
 }
 
 export default Alert;
