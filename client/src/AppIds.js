@@ -16,7 +16,11 @@ function AppIds() {
   useEffect(() => {
     socket.on('json', data => {
       setCount(count => count + 1)
-      if(array.length == 0) array.push(data)
+      if(array.length == 0) {
+        count3.current = 1
+        data.count = count3.current
+        array.push(data)
+      }
       else if(array[array.length-1].pkt_time != data.pkt_time) {
         count3.current = count3.current + 1
         data.count = count3.current
