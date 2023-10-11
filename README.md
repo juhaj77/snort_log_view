@@ -35,3 +35,6 @@ appid_listener =
 &ensp;&ensp;&ensp;&ensp;json_logging = true,  
 &ensp;&ensp;&ensp;&ensp;file = "/var/log/snort/appid.json",  
 }  
+  
+### todo
+Find a faster solution than readLastLines.
