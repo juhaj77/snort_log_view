@@ -10,27 +10,26 @@ function Perf() {
   const callServer = async () => {
     await fetch("http://localhost:9000/perf")
         .then(async res => await res.text())
-        .then(async res => {
-            setPerf(res.split('\n').map(l => l.split(',')))
-           
+        .then(res => {
+           setPerf(res.split('\n').map(l => l.split(',')))
+           let hellishObject = {}
+           for(let i = 0; i < perf[0].length; i++){
+               hellishObject[perf[0][i]] = []
+               for(let j = 1; j < perf.length - 1; j++){
+                   if(!isNaN(perf[j][i])) hellishObject[perf[0][i]].push(perf[j][i])
+               } 
+           }
+           for(const key of Object.keys(hellishObject)){
+               if(hellishObject[key].length > 0 && hellishObject[key].reduce((sum,value) => sum + value,0) == 0)
+                   delete hellishObject[key]
+           }
+           setPerfObject(hellishObject)
         })
         .catch(err => console.log(err));  
   }
 
   useEffect(() => {
-    callServer()
-    let hellishObject = {}
-    for(let i = 0; i < perf[0].length; i++){
-        hellishObject[perf[0][i]] = []
-        for(let j = 1; j < perf.length - 1; j++){
-            if(!isNaN(perf[j][i])) hellishObject[perf[0][i]].push(perf[j][i])
-        } 
-    }
-    for(const key of Object.keys(hellishObject)){
-        if(hellishObject[key].length > 0 && hellishObject[key].reduce((sum,value) => sum + value,0) == 0)
-            delete hellishObject[key]
-    }
-    setPerfObject(hellishObject)
+   callServer()
   },[perf])
 
   const convertTime = (seconds) => {

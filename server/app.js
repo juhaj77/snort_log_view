@@ -31,7 +31,7 @@ io.on('connection', function (socket) {
   console.log('client connect');
 });
 const tail = new Tail('/var/log/snort/appid.json')
-tail.on('line', function(data) {     
+tail.on('line', (data) => {   
   json = JSON.parse(data)
   io.sockets.emit('json', json)
 });
