@@ -135,6 +135,7 @@
 }
 table, th, td {
   border: 1px solid rgb(28, 28, 28);
+  white-space: nowrap;
 }
 tr {
   background-color: #343c4b;
