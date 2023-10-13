@@ -104,9 +104,9 @@ function Search() {
   }
 
   return alertsToShow.length === 0 ? <Loading text='loading...'/> : 
-    <div className="App-header">
+    <div className="mytable">
       <div style={{
-        marginTop:"1.5em",
+        marginTop:"3em",
         alignItems:"start"}}>
       <div className="search">
         <span className="date">start date:</span>

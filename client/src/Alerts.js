@@ -25,7 +25,7 @@ function Alerts() {
 
   return alertsArray.length === 0 ? <Loading text='loading...'/> :
     <div className="App">
-      <table className="App-header">
+      <table className="mytable" style={{paddingTop:'2em'}}>
         <tbody>
           <tr style={{backgroundColor:'black'}}>
             <th>timestamp</th>

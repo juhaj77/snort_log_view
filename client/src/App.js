@@ -8,7 +8,7 @@ import Perf from './Perf';
 const Tabs = ({onClick,show}) => {
   switch(show) {
     case 'ALERTS': return (
-      <div style={{display:'inline-flex'}}>
+      <div className="tabs">
         <div className="active">ALERTS</div>
         <div className="passive" onClick={() => onClick('APPID')}>APPID</div>
         <div className="passive" onClick={() => onClick('SEARCH')}>SEARCH</div>
@@ -16,7 +16,7 @@ const Tabs = ({onClick,show}) => {
       </div>)
    case 'APPID': 
     return (
-      <div style={{display:'inline-flex'}}>
+      <div className="tabs">
         <div className="passive" onClick={() => onClick('ALERTS')}>ALERTS</div>
         <div className="active">APPID</div>
         <div className="passive" onClick={() => onClick('SEARCH')}>SEARCH</div>
@@ -25,7 +25,7 @@ const Tabs = ({onClick,show}) => {
   
   case 'SEARCH': 
     return (
-      <div style={{display:'inline-flex'}}>
+      <div className="tabs">
         <div className="passive" onClick={() => onClick('ALERTS')}>ALERTS</div>
         <div className="passive" onClick={() => onClick('APPID')}>APPID</div>
         <div className="active">SEARCH</div>
@@ -33,7 +33,7 @@ const Tabs = ({onClick,show}) => {
       </div>)
      case 'PERF': 
      return (
-       <div style={{display:'inline-flex'}}>
+       <div className="tabs">
          <div className="passive" onClick={() => onClick('ALERTS')}>ALERTS</div>
          <div className="passive" onClick={() => onClick('APPID')}>APPID</div>
          <div className="passive" onClick={() => onClick('SEARCH')}>SEARCH</div>
@@ -47,26 +47,26 @@ const App = () => {
   switch(show) {
   case 'ALERTS':
     return (
-    <div>
+    <div style={{width:'100%'}}>
       <Tabs onClick={setShow} show={show}/>
       <Alerts/>
    </div>
   )
   case 'APPID':
     return (
-    <div>
+    <div style={{width:'100%'}}>
       <Tabs onClick={setShow} show={show}/>
       <AppIds/>
    </div>)
   case 'SEARCH':
     return (
-    <div>
+    <div style={{width:'100%'}}>
       <Tabs onClick={setShow} show={show}/>
       <Search/>
    </div>)
    case 'PERF':
     return (
-    <div>
+    <div style={{width:'100%'}}>
       <Tabs onClick={setShow} show={show}/>
       <Perf/>
    </div>)
