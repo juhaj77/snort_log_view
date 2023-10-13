@@ -5,7 +5,7 @@ Colorized html table view for Snort alert, appid and performance monitor log. Th
 /var/log/snort/appid.json  
 /var/log/snort/perf_monitor_base.csv  
   
-Search feature search of the last 1000 alerts. You can modify it in /server/routes/alertsAll.js on line 10:  
+Search feature search of the last 1000 alerts. You can modify it in /server/routes/alertsAll.js on line 9:  
   
 `const tail = new Tail('/var/log/snort/alert_json.txt',{nLines:1000})`  
   
