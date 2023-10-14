@@ -6,7 +6,7 @@ var router = express.Router();
 router.get('/',async function(req, res, next) {
     let array = new Array()
     
-    readLastLines.read('/var/log/snort/alert_json.txt', 35)
+    readLastLines.read('/var/log/snort/alert_json.txt', 38)
 	.then(async (lines) => {
         array = await lines.split('\n')
         array.pop()
