@@ -35,6 +35,16 @@ appid_listener =
 &ensp;&ensp;&ensp;&ensp;json_logging = true,  
 &ensp;&ensp;&ensp;&ensp;file = "/var/log/snort/appid.json",  
 }  
-  
+
+## screenshots  
+The alert view shows the latest alerts   
+![alert view](https://github.com/juhaj77/snort_log_view/blob/main/screenshots/1.png)   
+Appid view is updated with a socket connection, so it is real-time  
+![appid view](https://github.com/juhaj77/snort_log_view/blob/main/screenshots/2.png)  
+The search tab has various search and arrangement features
+![search view](https://github.com/juhaj77/snort_log_view/blob/main/screenshots/3.png)  
+![search view](https://github.com/juhaj77/snort_log_view/blob/main/screenshots/4.png)  
+Performance monitor data in table
+![perf monitor view](https://github.com/juhaj77/snort_log_view/blob/main/screenshots/6.png) 
 ### todo
 Find a faster solution than read-last-lines.
