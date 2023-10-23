@@ -4,7 +4,7 @@ import Loading from './Loading'
 import './App.css';
 import AppId from './AppId';
 
-const socket = io('ws://localhost:3003')
+const socket = io('ws://localhost:3009')
 
 function AppIds() {
 

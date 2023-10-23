@@ -4,13 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+var http = require('http')
 //var indexRouter = require('./routes/index');
 var Tail = require('tail').Tail;
 var alertsRouter = require('./routes/alerts');
 var alertsAllRouter = require('./routes/alertsAll');
 var perfRouter = require('./routes/perf');
 var app = express();
-var io = require('socket.io')(app.listen(3003), {
+var io = require('socket.io')(app.listen(3009), {
   cors: {
     origin: true,
     credentials: true,
@@ -18,6 +19,7 @@ var io = require('socket.io')(app.listen(3003), {
   allowEIO3: true,});
 
 // view engine setup
+//app.set('port',7000)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(logger('dev'));
@@ -54,5 +56,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+////const server = http.createServer(app)
+////server.listen(7000)
 
 module.exports = app;
