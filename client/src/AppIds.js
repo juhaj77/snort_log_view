@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import io from 'socket.io-client'
-import Loading from './Loading'
+import StyledSpinner from './StyledSpinner'
 import './App.css';
 import AppId from './AppId';
 
@@ -31,7 +31,7 @@ function AppIds() {
     })
   },[])
 
-  return appIdArray.length === 0 ? <Loading text='listening...'/> :
+  return appIdArray.length === 0 ? <StyledSpinner/> :
     <div className="App">
       <table className="mytable" style={{paddingTop:'2em',fontSize:'11px'}}>
         <tbody>

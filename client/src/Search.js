@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Loading from './Loading'
+import StyledSpinner from './StyledSpinner'
 import './App.css';
 import Alert from './Alert';
 
@@ -103,7 +103,7 @@ function Search() {
     setAlertsToShow(result)
   }
 
-  return alertsToShow.length === 0 ? <Loading text='loading...'/> : 
+  return alertsToShow.length === 0 ? <StyledSpinner/> : 
     <div className="mytable">
       <div style={{
         marginTop:"3em",

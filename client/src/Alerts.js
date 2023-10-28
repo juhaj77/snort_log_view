@@ -1,5 +1,5 @@
 import React, { useState, useEffect,useRef } from 'react'
-import Loading from './Loading'
+import StyledSpinner from './StyledSpinner'
 import './App.css';
 import Alert from './Alert';
 
@@ -23,7 +23,7 @@ function Alerts() {
     return () => clearTimeout(timeoutId.current)
   },[])
 
-  return alertsArray.length === 0 ? <Loading text='loading...'/> :
+  return alertsArray.length === 0 ? <StyledSpinner/> :
     <div className="App">
       <table className="mytable" style={{paddingTop:'2em'}}>
         <tbody>

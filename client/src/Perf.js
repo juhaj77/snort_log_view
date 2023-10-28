@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Loading from './Loading'
+import StyledSpinner from './StyledSpinner'
 import './App.css';
 
 function Perf() {
@@ -38,7 +38,7 @@ function Perf() {
     return (date.getMonth()+1)+'/'+date.getDate()+'-'+time[0]
   }
 
-  return Object.keys(perfObject).length === 0 ? <Loading text='loading...'/> :
+  return Object.keys(perfObject).length === 0 ? <StyledSpinner/> :
     <div className='perf'>
         <table>
             <tbody>
