@@ -4,6 +4,7 @@ import './App.css';
 
 function Perf() {
 
+    
     const [perfObject, setPerfObject] = useState({})
     const perf = useRef()
     const timeoutId = useRef(-1)
