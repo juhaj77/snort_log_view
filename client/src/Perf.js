@@ -1,36 +1,40 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import StyledSpinner from './StyledSpinner'
 import './App.css';
 
 function Perf() {
 
-  const [perf, setPerf] = useState([[]])
-  const [perfObject, setPerfObject] = useState({})
+    const [perfObject, setPerfObject] = useState({})
+    const perf = useRef()
+    const timeoutId = useRef(-1)
 
-  const callServer = async () => {
-    await fetch("http://localhost:9000/perf")
-        .then(async res => await res.text())
-        .then(res => {
-           setPerf(res.split('\n').map(l => l.split(',')))
-           let hellishObject = {}
-           for(let i = 0; i < perf[0].length; i++){
-               hellishObject[perf[0][i]] = []
-               for(let j = 1; j < perf.length - 1; j++){
-                   if(!isNaN(perf[j][i])) hellishObject[perf[0][i]].push(perf[j][i])
-               } 
-           }
-           for(const key of Object.keys(hellishObject)){
-               if(hellishObject[key].length > 0 && hellishObject[key].reduce((sum,value) => sum + value,0) == 0)
-                   delete hellishObject[key]
-           }
-           setPerfObject(hellishObject)
-        })
-        .catch(err => console.log(err));  
+    const callServer = async () => {
+        await fetch("http://localhost:9000/perf")
+            .then(async res => await res.text())
+            .then(res => {
+                perf.current = res.split('\n').map(l => l.split(','))
+                let hellishObject = {}
+                for(let i = 0; i < perf.current[0].length; i++){
+                    hellishObject[perf.current[0][i]] = []
+                    for(let j = 1; j < perf.current.length - 1; j++){
+                        if(!isNaN(perf.current[j][i])) hellishObject[perf.current[0][i]].push(perf.current[j][i])
+                    } 
+                }
+                for(const key of Object.keys(hellishObject)){
+                    if(hellishObject[key].length > 0 && hellishObject[key].reduce((sum,value) => sum + value,0) == 0)
+                        delete hellishObject[key]
+                }
+                setPerfObject(hellishObject)
+            })
+        .catch(err => console.log(err));
+        clearTimeout(timeoutId.current)
+        timeoutId.current = setTimeout(callServer,30000)
   }
 
   useEffect(() => {
    callServer()
-  },[perf])
+   return () => clearTimeout(timeoutId.current)
+  },[])
 
   const convertTime = (seconds) => {
     const date = new Date(seconds*1000)
