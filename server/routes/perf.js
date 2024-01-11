@@ -20,10 +20,12 @@ router.get('/',async function(req, res, next) {
             response = array
             index++
         } while (array[0].split(',')[0] != '#timestamp')
+        res.send(response)
     } catch (e) {
-        res.status(500).send(e.message)
+        console.log(e.message)
+        res.status(500)
+        res.end()
     }
-    res.send(response)
 });
 
 /* // very slow solution if there is a lot of data
