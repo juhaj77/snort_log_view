@@ -11,12 +11,13 @@ function Perf() {
     const callServer = async () => {
         await fetch("http://localhost:9000/perf")
             .then(async res => await res.text())
-            .then(res => {
-                perf.current = res.split('\n').map(l => l.split(','))
+            .then(async res => {
+                const resp = await JSON.parse(res)
+                perf.current = resp.map(l => l.split(','))
                 let hellishObject = {}
                 for(let i = 0; i < perf.current[0].length; i++){
                     hellishObject[perf.current[0][i]] = []
-                    for(let j = 1; j < perf.current.length - 1; j++){
+                    for(let j = 1; j < perf.current.length; j++){
                         if(!isNaN(perf.current[j][i])) hellishObject[perf.current[0][i]].push(perf.current[j][i])
                     } 
                 }
