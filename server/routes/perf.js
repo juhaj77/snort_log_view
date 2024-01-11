@@ -15,7 +15,7 @@ router.get('/',async function(req, res, next) {
         tail.on('line', data => {
             array.push(data)
         })
-        await sleep(index*10) // time for reading
+        await sleep(index*20) // time for reading
         response = array
         index++
     } while (array[0].split(',')[0] != '#timestamp')
