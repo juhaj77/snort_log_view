@@ -9,16 +9,20 @@ router.get('/',async function(req, res, next) {
     let index = 1
     let response = ''
     let array = []
-    do {
-        array = []
-        const tail = new Tail('/var/log/snort/perf_monitor_base.csv',{nLines:index})
-        tail.on('line', data => {
-            array.push(data)
-        })
-        await sleep(index*20) // time for reading
-        response = array
-        index++
-    } while (array[0].split(',')[0] != '#timestamp')
+    try {
+        do {
+            array = []
+            const tail = new Tail('/var/log/snort/perf_monitor_base.csv',{nLines:index})
+            tail.on('line', data => {
+                array.push(data)
+            })
+            await sleep(index*10) // time for reading
+            response = array
+            index++
+        } while (array[0].split(',')[0] != '#timestamp')
+    } catch (e) {
+        res.status(500).send(e.message)
+    }
     res.send(response)
 });
 
