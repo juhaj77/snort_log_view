@@ -29,7 +29,7 @@ function Perf() {
             })
         .catch(err => console.log(err));
         clearTimeout(timeoutId.current)
-        timeoutId.current = setTimeout(callServer,30000)
+        timeoutId.current = setTimeout(callServer,60000)
   }
 
   useEffect(() => {
