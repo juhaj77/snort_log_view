@@ -15,6 +15,7 @@ Large values cause memory issues with the browser. All data is read as objects i
 /snort_log_view/client$ npm install  
 /snort_log_view/server$ npm install  
 ### start
+/snort_log_view/server$ export NODE_OPTIONS=--max-old-space-size=8192    
 /snort_log_view/server$ sudo npm start  
 /snort_log_view/client$ npm start  
 
