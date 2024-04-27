@@ -11,9 +11,10 @@ function Search() {
   const [endString, setEndString] = useState('')
   const [mode, setMode] = useState('search')
   const [filter, setFilter] = useState('')
+  const [alerts, setAlerts] = useState(1000)
 
-  const callServer = async () => {
-    await fetch("http://localhost:9000/alerts_all")
+  const callServer = async (amount) => {
+    await fetch(`http://localhost:9000/alerts_all/${amount}`)
         .then(res => res.text())
         .then(res => {
           setAlertsArray(JSON.parse(res))
@@ -34,7 +35,7 @@ function Search() {
   }
 
   useEffect(() => {
-    callServer()
+    callServer(alerts)
   },[])
 
   const filterByDate =() => {
@@ -102,21 +103,36 @@ function Search() {
     })
     setAlertsToShow(result)
   }
-
+  const handleAmount = str => {
+    if(isNaN(str)) return
+    setAlerts(str)
+    callServer(str)
+  }
   return alertsToShow.length === 0 ? <StyledSpinner/> : 
     <div className="mytable">
       <div style={{
         marginTop:"3em",
         alignItems:"start"}}>
+      
       <div className="search">
-        <span className="date">start date:</span>
+        <div style={{whiteSpace:'nowrap'}}>&#160;&#160;get&#160;&#160;
+          <input style={{width:'4em'}} value={alerts} onChange={(event) => handleAmount(event.target.value)}/>
+          &#160;&#160;alerts&#160;&#160;
+        </div>
+       
+        <div style={{
+          lineHeight:'1em',
+          padding:'.3em 1em .2em 1em',
+          fontWeight:'700',
+          background:'darkred'}}>filters:</div>
+        <span className="date">start date</span>
         <div className="tooltip">
           <input value={startString} onChange={(event) => setStartString(event.target.value)}/>
           <span className="tooltiptext">
             &#160;&#160;&#160;YYYY-MM-DDTHH:mm:ss <span style={{color:"red"}}>or</span> MM/DD-HH:mm:ss&#160;&#160;&#160;
           </span>
         </div>
-        <span className="date">end date:</span>
+        <span className="date">end date</span>
         <div className="tooltip">
           <input value={endString} onChange={(event) => setEndString(event.target.value)}/>
           <span className="tooltiptext">
@@ -133,6 +149,7 @@ function Search() {
           <button onClick={sortByRarity}>R</button>
           <span className="tooltiptext">&#160;&#160;&#160;sort by rarity&#160;&#160;&#160;</span>
         </div>
+        
       </div>
       <table >
         <tbody>

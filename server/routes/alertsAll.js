@@ -4,17 +4,16 @@ const fs = require('fs')
 var router = express.Router();
 var Tail = require('tail').Tail;
 
-router.get('/',async function(req, res, next) {
+router.get('/:amount',async function(req, res, next) {
     let array = new Array()
-    const tail = new Tail('/var/log/snort/alert_json.txt',{nLines:1000})
+    const tail = new Tail('/var/log/snort/alert_json.txt',{nLines:req.params.amount})
     tail.on('line', data => {
         array.push(JSON.parse(data))
     })
     setTimeout(() => {
         res.send(array)
         tail.unwatch()
-    },1000) //Time in milliseconds to read lines. 
-            //Remember to adjust when changing nLines
+    },req.params.amount/2) //Time in milliseconds to read lines. 
 
    /* This solution took 30 seconds:
     readLastLines.read('/var/log/snort/alert_json.txt', 1000)
