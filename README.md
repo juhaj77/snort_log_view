@@ -1,10 +1,13 @@
 # snort_log_view
-Colorized html table view for Snort alert, appid and performance monitor log. The Perf tab cleans out fields with zero values. The alert information generates the Wireshark filter from time data. The appid feature displays real-time data. The appid_listener is https://github.com/snort3/snort3_extra feature. Server reads the files:  
+**Colorized HTML table view for Snort alerts, AppID, and performance monitor logs.**  
+The **Perf** tab automatically hides fields with zero values.  
+Alert information is used to generate a **Wireshark filter** based on timestamp data.  
+The **AppID** feature displays real-time data. It uses the `appid_listener` feature from [snort3_extra](https://github.com/snort3/snort3_extra).  
+The server reads the following log files: 
   
-/var/log/snort/alert_json.txt  
-/var/log/snort/appid.json  
-/var/log/snort/perf_monitor_base.csv  
-  
+- `/var/log/snort/alert_json.txt`
+- `/var/log/snort/appid.json`
+- `/var/log/snort/perf_monitor_base.csv`
 
 ## install  
 /snort_log_view/client$ npm install  
